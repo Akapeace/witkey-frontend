@@ -2,8 +2,8 @@
    <div class="grid grid-cols-2 h-screen">
     <div class="col-span-2 order-2 p-10 md:col-span-1 md:order-1 bg-slate-900">
         <div class="flex justify-center items-center h-full flex-col">
-            <h1 class="font-bold test-4xl mb-7 text-white">WitKey 维特奇</h1>
-            <p class="text-white">享受代码的乐趣 —— Enjoy the fun of coding</p>
+            <h1 class="font-bold text-4xl mb-5 text-white">Witkey</h1>
+            <p class="italic text-lg text-white">享受代码的乐趣 —— Enjoy the fun of coding</p>
             <img src="@/assets/blog.png" class="w-1/2">
         </div>
     </div>
