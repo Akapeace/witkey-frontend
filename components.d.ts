@@ -13,6 +13,9 @@ export {}
 declare module 'vue' {
   export interface GlobalComponents {
     ElButton: typeof import('element-plus/es')['ElButton']
+    ElForm: typeof import('element-plus/es')['ElForm']
+    ElFormItem: typeof import('element-plus/es')['ElFormItem']
+    ElInput: typeof import('element-plus/es')['ElInput']
     ElRow: typeof import('element-plus/es')['ElRow']
     HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
     IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
@@ -30,6 +33,9 @@ declare module 'vue' {
 // For TSX support
 declare global {
   const ElButton: typeof import('element-plus/es')['ElButton']
+  const ElForm: typeof import('element-plus/es')['ElForm']
+  const ElFormItem: typeof import('element-plus/es')['ElFormItem']
+  const ElInput: typeof import('element-plus/es')['ElInput']
   const ElRow: typeof import('element-plus/es')['ElRow']
   const HelloWorld: typeof import('./src/components/HelloWorld.vue')['default']
   const IconCommunity: typeof import('./src/components/icons/IconCommunity.vue')['default']
