@@ -1,5 +1,7 @@
 import Index from '@/pages/frontend/index.vue'
 
+import Login from '@/pages/admin/login.vue'
+
 import { createRouter, createWebHashHistory } from 'vue-router'
 
 // 统一在这里声明所有路由
@@ -8,9 +10,16 @@ const routes = [
     path: '/',
     component: Index,
     meta: {
-      title: 'Witkey首页',
+      title: 'Witkey 首页'
     },
   },
+  {
+    path: '/login', 
+    component: Login,
+    meta: {
+        title: 'Witkey 登录页'
+    }
+  }
 ]
 
 // 创建路由

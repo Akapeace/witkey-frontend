@@ -60,7 +60,7 @@
         </div>
 
         <!-- 登录 -->
-        <div class="text-gray-900 ml-1 mr-1 hover:text-blue-700">登录</div>
+        <div class="text-gray-900 ml-1 mr-1 hover:text-blue-700" @click="$router.push('/login')">登录</div>
 
         <button
           data-collapse-toggle="navbar-search"
@@ -154,9 +154,13 @@
   </nav>
 </template>
 
-<script setup>
+<script setup lang="ts">
 import { onMounted } from 'vue'
 import { initCollapses } from 'flowbite'
+
+defineOptions({
+  name: 'FrontendIndex' 
+})
 
 // 初始化 flowbit 相关组件
 onMounted(() => {
