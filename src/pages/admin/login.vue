@@ -19,11 +19,11 @@
           <span>账号密码登录</span>
           <span class="h-[1px] w-16 bg-gray-200"></span>
         </div>
-        <el-form class="w-5/6 md:w-2/5">
-          <el-form-item>
+        <el-form class="w-5/6 md:w-2/5" ref="formRef" :rules="rules" :model="form">
+          <el-form-item prop="username">
             <el-input size="large" v-model="form.username" placeholder="请输入用户名" :prefix-icon="User" clearable />
           </el-form-item>
-          <el-form-item>
+          <el-form-item prop="password">
             <el-input
               size="large"
               type="password"
@@ -34,7 +34,7 @@
             />
           </el-form-item>
           <el-form-item>
-            <el-button class="w-full" size="larg" type="primary" @click="onSubmit">登录</el-button>
+            <el-button class="w-full mt-2" size="large" type="primary" @click="onSubmit">登录</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -46,11 +46,30 @@
 import { Lock, User } from '@element-plus/icons-vue'
 import { onMounted } from 'vue'
 import { login } from '@/api/admin/user'
-import { reactive } from 'vue'
+import { ref,reactive } from 'vue'
 import { useRouter } from 'vue-router';
 
 
 const router = useRouter()
+const formRef = ref(null)
+
+// 表单验证规则
+const rules = {
+    username: [
+        {
+            required: true,
+            message: '用户名不能为空',
+            trigger: 'blur'
+        }
+    ],
+    password: [
+        {
+            required: true,
+            message: '密码不能为空',
+            trigger: 'blur',
+        },
+    ]
+}
 
 // 定义响应式的表单对象
 const form = reactive({
@@ -58,14 +77,24 @@ const form = reactive({
     password: ''
 })
 
-// 登录
 const onSubmit = () => {
     console.log('登录')
-    login(form.username, form.password).then((res) => {
-        console.log(res)
-        if (res.data.success == true) {
-          router.push('/admin/index')
+    // 先验证 form 表单字段
+    formRef.value.validate((valid) => {
+        if (!valid) {
+            console.log('表单验证不通过')
+            return false
         }
+
+        // 调用登录接口
+        login(form.username, form.password).then((res) => {
+            console.log(res)
+            // 判断是否成功
+            if (res.data.success == true) {
+                // 跳转到后台首页
+                router.push('/admin/index')
+            }
+        })
     })
 }
 
