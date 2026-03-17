@@ -33,10 +33,10 @@ instance.interceptors.response.use(function (response) {
 }, function (error) {
     // 超出 2xx 范围的状态码都会触发该函数。
     // 对响应错误做点什么
-     // 若后台有错误提示就用提示文字，默认提示为 '请求失败'
-     let errorMsg = error.response.data.message || '请求失败'
-     // 弹错误提示
-     showMessage(errorMsg, 'error')
+    // 若后台有错误提示就用提示文字，默认提示为 '请求失败'
+    let errorMsg = error?.response?.data?.message || '请求失败'
+    // 弹错误提示
+    showMessage(errorMsg, 'error')
     return Promise.reject(error)
 })
 
