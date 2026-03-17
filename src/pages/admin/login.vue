@@ -21,19 +21,20 @@
         </div>
         <el-form class="w-5/6 md:w-2/5">
           <el-form-item>
-            <el-input size="large" placeholder="请输入用户名" :prefix-icon="User" clearable />
+            <el-input size="large" v-model="form.username" placeholder="请输入用户名" :prefix-icon="User" clearable />
           </el-form-item>
           <el-form-item>
             <el-input
               size="large"
               type="password"
+              v-model="form.password"
               placeholder="请输入密码"
               :prefix-icon="Lock"
               clearable
             />
           </el-form-item>
           <el-form-item>
-            <el-button class="w-full" size="larg" type="primary">登录</el-button>
+            <el-button class="w-full" size="larg" type="primary" @click="onSubmit">登录</el-button>
           </el-form-item>
         </el-form>
       </div>
@@ -44,6 +45,30 @@
 <script setup lang="ts">
 import { Lock, User } from '@element-plus/icons-vue'
 import { onMounted } from 'vue'
+import { login } from '@/api/admin/user'
+import { reactive } from 'vue'
+import { useRouter } from 'vue-router';
+
+
+const router = useRouter()
+
+// 定义响应式的表单对象
+const form = reactive({
+    username: '',
+    password: ''
+})
+
+// 登录
+const onSubmit = () => {
+    console.log('登录')
+    login(form.username, form.password).then((res) => {
+        console.log(res)
+        if (res.data.success == true) {
+          router.push('/admin/index')
+        }
+    })
+}
+
 
 defineOptions({
   name: 'AdminLogin',

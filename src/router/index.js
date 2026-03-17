@@ -1,6 +1,6 @@
 import Index from '@/pages/frontend/index.vue'
-
 import Login from '@/pages/admin/login.vue'
+import AdminIndex from '@/pages/admin/index.vue'
 
 import { createRouter, createWebHashHistory } from 'vue-router'
 
@@ -14,10 +14,17 @@ const routes = [
     },
   },
   {
-    path: '/login', 
+    path: '/login',
     component: Login,
     meta: {
         title: 'Witkey 登录页'
+    }
+  },
+  {
+    path: '/admin/index',
+    component: AdminIndex,
+    meta: {
+      title: 'Witkey 后台首页'
     }
   }
 ]
