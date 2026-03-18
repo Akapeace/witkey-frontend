@@ -1,6 +1,8 @@
 import axios from "axios";
 import { showMessage} from '@/composables/util'
 
+import { getToken } from "@/composables/auth";
+
 // 创建 Axios 实例
 const instance = axios.create({
     baseURL: "/api", // 你的 API 基础 URL
