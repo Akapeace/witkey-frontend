@@ -31,6 +31,7 @@
               placeholder="请输入密码"
               :prefix-icon="Lock"
               clearable
+              show-password
             />
           </el-form-item>
           <el-form-item>
