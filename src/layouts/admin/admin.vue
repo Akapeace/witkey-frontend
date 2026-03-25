@@ -2,31 +2,31 @@
   <!-- 外层容器 -->
   <el-container>
 
-      <!-- 左边侧边栏 -->
-      <el-aside>
-          <AdminMenu></AdminMenu>
-      </el-aside>
+    <!-- 左边侧边栏 -->
+    <el-aside>
+      <AdminMenu></AdminMenu>
+    </el-aside>
 
-      <!-- 主容器 -->
-      <el-container>
-          <!-- 顶栏容器 -->
-          <el-header>
-              <AdminHeader></AdminHeader>
-          </el-header>
+    <!-- 主容器 -->
+    <el-container>
+      <!-- 顶栏容器 -->
+      <el-header>
+        <AdminHeader></AdminHeader>
+      </el-header>
 
-          <el-main>
-              <!-- 标签导航栏 -->
-              <AdminTagList></AdminTagList>
+      <el-main>
+        <!-- 标签导航栏 -->
+        <AdminTagList></AdminTagList>
 
-              <!-- 主内容（根据路由动态展示不同页面） -->
-              <router-view></router-view>
-          </el-main>
+        <!-- 主内容（根据路由动态展示不同页面） -->
+        <router-view></router-view>
+      </el-main>
 
-          <!-- 底栏容器 -->
-          <el-footer>
-              <AdminFooter></AdminFooter>
-          </el-footer>
-      </el-container>
+      <!-- 底栏容器 -->
+      <el-footer>
+        <AdminFooter></AdminFooter>
+      </el-footer>
+    </el-container>
   </el-container>
 </template>
 
@@ -40,6 +40,6 @@ import AdminTagList from '@/components/AdminTagList.vue';
 
 <style scoped>
 .el-header {
-    padding: 0!important;
+  padding: 0 !important;
 }
 </style>
