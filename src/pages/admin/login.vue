@@ -43,7 +43,7 @@
   </div>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { Lock, User } from '@element-plus/icons-vue'
 import { login } from '@/api/admin/user'
 import {  ref, reactive, onMounted, onBeforeUnmount} from 'vue'

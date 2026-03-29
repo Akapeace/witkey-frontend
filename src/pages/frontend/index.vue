@@ -154,7 +154,7 @@
   </nav>
 </template>
 
-<script setup lang="ts">
+<script setup>
 import { onMounted } from 'vue'
 import { initCollapses } from 'flowbite'
 
