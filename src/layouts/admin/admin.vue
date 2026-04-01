@@ -3,7 +3,7 @@
   <el-container>
 
     <!-- 左边侧边栏 -->
-    <el-aside  :width='menuStore.menuWidth' class="transition-all duration-300 shadow">
+    <el-aside :width='menuStore.menuWidth' class="transition-all duration-300 shadow">
       <AdminMenu></AdminMenu>
     </el-aside>
 
@@ -44,6 +44,10 @@ const menuStore = useMenuStore()
 
 <style scoped>
 .el-header {
+  padding: 0 !important;
+}
+
+.el-footer {
   padding: 0 !important;
 }
 </style>
