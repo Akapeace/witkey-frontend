@@ -43,6 +43,7 @@ declare module 'vue' {
     ElTabs: typeof import('element-plus/es')['ElTabs']
     ElText: typeof import('element-plus/es')['ElText']
     ElTooltip: typeof import('element-plus/es')['ElTooltip']
+    FormDialog: typeof import('./src/components/FormDialog.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
   }
@@ -81,6 +82,7 @@ declare global {
   const ElTabs: typeof import('element-plus/es')['ElTabs']
   const ElText: typeof import('element-plus/es')['ElText']
   const ElTooltip: typeof import('element-plus/es')['ElTooltip']
+  const FormDialog: typeof import('./src/components/FormDialog.vue')['default']
   const RouterLink: typeof import('vue-router')['RouterLink']
   const RouterView: typeof import('vue-router')['RouterView']
 }

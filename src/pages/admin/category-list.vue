@@ -24,7 +24,7 @@
     <el-card shadow="never">
       <!-- 新增按钮 -->
       <div class="mb-5">
-        <el-button type="primary" @click="dialogVisible = true">
+        <el-button type="primary" @click="addCategoryBtnClick">
           <el-icon class="mr-1">
             <Plus />
           </el-icon>
@@ -46,26 +46,17 @@
           </template>
         </el-table-column>
       </el-table>
-
     </el-card>
+
     <!-- 添加分类 -->
-    <el-dialog v-model="dialogVisible" title="添加文章分类" width="40%" :draggable="true" :close-on-click-modal="false"
-      :close-on-press-escape="false">
+    <FormDialog ref="formDialogRef" title="添加文章分类" destroyOnClose @submit="onSubmit">
       <el-form ref="formRef" :rules="rules" :model="form">
-        <el-form-item label="分类名称" prop="name" label-width="80px">
-          <!-- 输入框组件 -->
-          <el-input size="large" v-model="form.name" placeholder="请输入分类名称" maxlength="20" show-word-limit clearable />
+        <el-form-item label="分类名称" prop="name" label-width="80px" size="large">
+          <el-input v-model="form.name" placeholder="请输入分类名称" maxlength="20" show-word-limit clearable />
         </el-form-item>
       </el-form>
-      <template #footer>
-        <span class="dialog-footer">
-          <el-button @click="dialogVisible = false">取消</el-button>
-          <el-button type="primary" @click="onSubmit">
-            提交
-          </el-button>
-        </span>
-      </template>
-    </el-dialog>
+    </FormDialog>
+
     <!-- 分页 -->
     <div class="mt-10 flex justify-center">
       <el-pagination v-model:current-page="current" v-model:page-size="size" :page-sizes="[10, 20, 50]" :small="false"
@@ -82,6 +73,7 @@ import { ref, onMounted, reactive } from 'vue'
 import moment from 'moment'
 import { getCategoryPageList, addCategory, deleteCategory } from '@/api/admin/category'
 import { showMessage, showModel } from '@/composables/util'
+import FormDialog from '@/components/FormDialog.vue'
 
 // 表格数据
 const tableData = ref([])
@@ -190,7 +182,13 @@ const shortcuts = [
 ]
 
 // 对话框是否显示
-const dialogVisible = ref(false)
+// const dialogVisible = ref(false)
+const formDialogRef = ref(null)
+
+// 新增分类按钮点击事件
+const addCategoryBtnClick = () => {
+  formDialogRef.value.open()
+}
 
 // 表单引用
 const formRef = ref(null)
@@ -218,14 +216,13 @@ const onSubmit = () => {
       return false
     }
 
-    // 请求添加分类接口
     addCategory(form).then((res) => {
       if (res.success == true) {
         showMessage('添加成功')
         // 将表单中分类名称置空
         form.name = ''
         // 隐藏对话框
-        dialogVisible.value = false
+        formDialogRef.value.close()
         // 重新请求分页接口，渲染数据
         getTableData()
       } else {
