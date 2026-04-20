@@ -32,7 +32,7 @@
       </div>
 
       <!-- 分页列表 -->
-      <el-table :data="tableData" border stripe style="width: 100%">
+      <el-table :data="tableData" border stripe style="width: 100%" v-loading="tableLoading">
         <el-table-column prop="name" label="分类名称" width="180" />
         <el-table-column prop="createTime" label="创建时间" width="180" />
         <el-table-column label="操作">
@@ -75,6 +75,9 @@ import { getCategoryPageList, addCategory, deleteCategory } from '@/api/admin/ca
 import { showMessage, showModel } from '@/composables/util'
 import FormDialog from '@/components/FormDialog.vue'
 
+
+// 表格加载 Loading
+const tableLoading = ref(false)
 // 表格数据
 const tableData = ref([])
 
@@ -95,6 +98,8 @@ const endDate = ref(null)
 // 获取分页数据
 // =======================
 function getTableData() {
+  // 显示表格 loading
+  tableLoading.value = true
   getCategoryPageList({
     current: current.value,
     size: size.value,
@@ -109,6 +114,7 @@ function getTableData() {
       total.value = res.total
     }
   })
+    .finally(() => tableLoading.value = false)
 }
 
 // 页面加载时执行（避免初始化报错）
@@ -215,7 +221,8 @@ const onSubmit = () => {
       console.log('表单验证不通过')
       return false
     }
-
+    // 显示提交按钮 loading
+    formDialogRef.value.showBtnLoading()
     addCategory(form).then((res) => {
       if (res.success == true) {
         showMessage('添加成功')
@@ -232,7 +239,7 @@ const onSubmit = () => {
         showMessage(message, 'error')
       }
     })
-
+      .finally(() => formDialogRef.value.closeBtnLoading())
   })
 }
 
