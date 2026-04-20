@@ -16,7 +16,7 @@
 
         </div>
 
-        <el-button type="primary" class="ml-3" :icon="Search">查询</el-button>
+        <el-button type="primary" class="ml-3" :icon="Search" @click="getTableData">查询</el-button>
         <el-button class="ml-3" :icon="RefreshRight" @click="reset">重置</el-button>
       </div>
     </el-card>
@@ -37,7 +37,7 @@
         <el-table-column prop="createTime" label="创建时间" width="180" />
         <el-table-column label="操作">
           <template #default="scope">
-            <el-button type="danger" size="small">
+            <el-button type="danger" size="small" @click="deleteCategorySubmit(scope.row)">
               <el-icon class="mr-1">
                 <Delete />
               </el-icon>
@@ -80,8 +80,8 @@
 import { Search, RefreshRight } from '@element-plus/icons-vue'
 import { ref, onMounted, reactive } from 'vue'
 import moment from 'moment'
-import { getCategoryPageList, addCategory } from '@/api/admin/category'
-import { showMessage } from '@/composables/util'
+import { getCategoryPageList, addCategory, deleteCategory } from '@/api/admin/category'
+import { showMessage, showModel } from '@/composables/util'
 
 // 表格数据
 const tableData = ref([])
@@ -236,6 +236,26 @@ const onSubmit = () => {
       }
     })
 
+  })
+}
+
+const deleteCategorySubmit = (row) => {
+  console.log(row.id)
+  showModel('是否确定要删除该分类？').then(() => {
+    deleteCategory(row.id).then((res) => {
+      if (res.success == true) {
+        showMessage('删除成功')
+        // 重新请求分页接口，渲染数据
+        getTableData()
+      } else {
+        // 获取服务端返回的错误消息
+        const message = res.message
+        // 提示错误消息
+        showMessage(message, 'error')
+      }
+    })
+  }).catch(() => {
+    console.log('取消了')
   })
 }
 </script>
