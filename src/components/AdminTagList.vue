@@ -82,6 +82,7 @@ const { menuStore, activeTab, tabList, tabChange, removeTab, handleCloseTab } = 
   line-height: 32px;
   border: 0;
   background: #fff;
+  margin-top: 1px;
 }
 
 .el-tabs--card>.el-tabs__header {
